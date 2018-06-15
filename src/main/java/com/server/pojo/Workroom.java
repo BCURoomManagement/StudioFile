@@ -1,6 +1,6 @@
 package com.server.pojo;
 
-public class workroom {
+public class Workroom {
 
     private int w_id;
     private String  w_name;
