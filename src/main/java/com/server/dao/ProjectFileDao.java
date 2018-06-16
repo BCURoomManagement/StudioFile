@@ -72,4 +72,28 @@ public class ProjectFileDao {
         return null;
     }
 
+    public boolean deleteProjectFile(int p_id) {
+        String sql = "delete from studiofile.projectfile where p_id=?";
+        // 获得连接
+        Connection conn = util.getConnection();
+        try {
+            // 获得预定义语句
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            // 设置插入参数
+            pstmt.setInt(1,p_id);
+
+            // 执行插入
+            if (pstmt.executeUpdate() > 0) {
+                conn.close();
+                return true;
+            } else {
+                conn.close();
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

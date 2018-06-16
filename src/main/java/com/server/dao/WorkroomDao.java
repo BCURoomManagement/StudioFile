@@ -41,4 +41,28 @@ public class WorkroomDao {
         return null;
     }
 
+    public  String getName(int w_id) {
+        // T-SQL语句
+        String sql = "select w_name from studiofile.workroom where w_id=?";
+        // 获得连接
+        Connection conn = util.getConnection();
+        try {
+            // 获得预定义语句
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            // 执行查询
+            pstmt.setInt(1,w_id);
+            ResultSet rs = pstmt.executeQuery();
+            String  name="";
+            while (rs.next()) {
+                // 封装信息
+              name=rs.getString(1);
+            }
+            conn.close();
+            return name;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

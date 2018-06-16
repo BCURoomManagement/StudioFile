@@ -23,6 +23,7 @@ public class LoginServlet extends HttpServlet {
         }else{
             request.getSession().setAttribute("u_id",us.getU_id());
             request.getSession().setAttribute("u_name",us.getU_name());
+            request.getSession().setAttribute("w_id",us.getW_id());
             request.setAttribute("result","true");
         }
 
