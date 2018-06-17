@@ -15,7 +15,7 @@ public class ProjectFileDao {
     DBUtil util = new DBUtil();
 
     public boolean insertProjectFile(ProjectFile pf) {
-        String sql = "insert into studiofile.projectfile(u_id,p_name,p_time) values(?,?,?)";
+        String sql = "insert into studiofile.projectfile(u_id,p_name,p_time,p_word,p_code,p_video) values(?,?,?,?,?,?)";
         // 获得连接
         Connection conn = util.getConnection();
         try {
@@ -25,7 +25,9 @@ public class ProjectFileDao {
             pstmt.setInt(1,pf.getU_id());
             pstmt.setString(2,pf.getP_name());
             pstmt.setString(3,pf.getP_time());
-
+            pstmt.setString(4,pf.getP_word());
+            pstmt.setString(5,pf.getP_code());
+            pstmt.setString(6,pf.getP_video());
             // 执行插入
             if (pstmt.executeUpdate() > 0) {
                 conn.close();

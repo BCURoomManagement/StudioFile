@@ -53,15 +53,24 @@
             if (pfList!=null){
             for(ProjectFile fp:pfList){
                 %>
+        <tr>
+
+
             <td><%=fp.getP_name()%></td>
-            <td><%=fp.getP_word().equals("")? "无":fp.getP_word()%></td>
+            <%if(fp.getP_word().equals("")){
+                out.println("<td>无</td>");
+            }else
+                out.println("<td><a  style='color:#ff5722' href='"+basePath+"upload/"+fp.getP_word()+"'>"+fp.getP_word()+"</a></td>");
+            %>
             <td><%=fp.getP_code().equals("")? "无":fp.getP_code()%></td>
             <td><%=fp.getP_video().equals("")? "无":fp.getP_video()%></td>
             <td><%=new UserDao().getOneUser(fp.getU_id()).getU_name()%></td>
             <td><%=fp.getP_time()%></td>
             <td id="layer">
                 <button  id="deletee" data-method="deletee" data-type="<%=fp.getP_id()%>" class="layui-btn layui-btn-mini">删除</button>
+
             </td>
+        </tr>
         <%
             }}
         %>

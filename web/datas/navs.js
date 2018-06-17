@@ -21,11 +21,11 @@ var navs = [{
         {
             "title": "添加",
             "icon": "fa-table",
-            "href": ""
+            "href": "Competition/CompetitionAdd.jsp"
         }, {
             "title": "查看",
             "icon": "fa-navicon",
-            "href": ""
+            "href": "Competition/CompetitionList.jsp"
         }
     ]
 },{
