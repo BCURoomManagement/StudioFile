@@ -4,11 +4,11 @@ var navs = [{
     "spread": true,
     "children": [
         {
-            "title": "添加",
+            "title": "项目添加",
             "icon": "fa-table",
             "href": "ProjectAdd.jsp"
         }, {
-            "title": "查看",
+            "title": "项目查看",
             "icon": "fa-navicon",
             "href": "ProjectList.jsp"
         }
@@ -19,13 +19,13 @@ var navs = [{
     "spread": false,
     "children": [
         {
-            "title": "添加",
+            "title": "比赛添加",
             "icon": "fa-table",
             "href": "Competition/CompetitionAdd.jsp"
         }, {
-            "title": "查看",
+            "title": "比赛查看",
             "icon": "fa-navicon",
-            "href": "Competition/CompetitionList.jsp"
+            "href": "Competition/CompetitionListServlet"
         }
     ]
 },{

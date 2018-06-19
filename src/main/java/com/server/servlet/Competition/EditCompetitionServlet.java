@@ -1,7 +1,8 @@
-package com.server.servlet;
+package com.server.servlet.Competition;
 
+import com.server.dao.CompetitionDao;
 import com.server.dao.ProjectFileDao;
-import com.server.pojo.ProjectFile;
+import com.server.pojo.Competition;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -16,8 +17,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-@WebServlet(name = "AddProjectFileServlet",urlPatterns = "/AddProjectFileServlet")
-public class AddProjectFileServlet extends HttpServlet {
+@WebServlet(name = "EditCompetitionServlet",urlPatterns = "/Competition/EditCompetitionServlet")
+public class EditCompetitionServlet extends HttpServlet {
     private static final String UPLOAD_DIRECTORY = "upload";
 
     //上传文件储存目录及文件名
@@ -27,10 +28,9 @@ public class AddProjectFileServlet extends HttpServlet {
     private static final int MAX_FILE_SIZE      = 1024 * 1024 * 40; // 40MB
     private static final int MAX_REQUEST_SIZE   = 1024 * 1024 * 50; // 50MB
 
-    ProjectFile pf=new ProjectFile();
+    Competition cp=new Competition();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         if (!ServletFileUpload.isMultipartContent(request)) {
             // 如果不是则停止
             PrintWriter writer = response.getWriter();
@@ -82,7 +82,7 @@ public class AddProjectFileServlet extends HttpServlet {
                         if("word".equals(item.getFieldName())){
                             String fileName = new File(item.getName()).getName();
                             if(fileName.equals("")){
-                                pf.setP_word("");
+                                cp.setC_word("");
                                 continue;
                             }
                             String filePath = uploadPath + File.separator + fileName;
@@ -92,12 +92,12 @@ public class AddProjectFileServlet extends HttpServlet {
                             // 保存文件到硬盘
                             item.write(storeFile);
                             UPLOAD_WORK=filePath;
-                            pf.setP_word(fileName);
+                            cp.setC_word(fileName);
                         }
                         if("code".equals(item.getFieldName())){
                             String fileName = new File(item.getName()).getName();
                             if(fileName.equals("")){
-                                pf.setP_code("");
+                                cp.setC_code("");
                                 continue;
                             }
                             String filePath = uploadPath + File.separator + fileName;
@@ -106,12 +106,12 @@ public class AddProjectFileServlet extends HttpServlet {
                             System.out.println(filePath);
                             // 保存文件到硬盘
                             item.write(storeFile);
-                            pf.setP_code(fileName);
+                            cp.setC_code(fileName);
                         }
                         if("video".equals(item.getFieldName())){
                             String fileName = new File(item.getName()).getName();
                             if(fileName.equals("")){
-                                pf.setP_video("");
+                                cp.setC_video("");
                                 continue;
                             }
                             String filePath = uploadPath + File.separator + fileName;
@@ -120,19 +120,45 @@ public class AddProjectFileServlet extends HttpServlet {
                             System.out.println(filePath);
                             // 保存文件到硬盘
                             item.write(storeFile);
-                            pf.setP_video(fileName);
+                            cp.setC_video(fileName);
+                        }
+                        if("certificate".equals(item.getFieldName())){
+                            String fileName = new File(item.getName()).getName();
+                            if(fileName.equals("")){
+                                cp.setC_certificate("");
+                                continue;
+                            }
+                            String filePath = uploadPath + File.separator + fileName;
+                            File storeFile = new File(filePath);
+                            // 在控制台输出文件的上传路径
+                            System.out.println(filePath);
+                            // 保存文件到硬盘
+                            item.write(storeFile);
+                            cp.setC_certificate(fileName);
                         }
                     }
                     else
                     {
-                        if("u_id".equals(item.getFieldName()))
-                            pf.setU_id(Integer.parseInt(new String(item.getString().getBytes(
+                        if("c_id".equals(item.getFieldName()))
+                            cp.setC_id(Integer.parseInt(new String(item.getString().getBytes(
                                     "ISO-8859-1"), "UTF-8")));
-                        if ("p_name".equals(item.getFieldName()))
-                            pf.setP_name(new String(item.getString().getBytes(
+                        if ("c_name".equals(item.getFieldName()))
+                            cp.setC_name(new String(item.getString().getBytes(
                                     "ISO-8859-1"), "UTF-8"));
-                        if ("p_time".equals(item.getFieldName()))
-                            pf.setP_time(new String(item.getString().getBytes(
+                        if ("c_time".equals(item.getFieldName()))
+                            cp.setC_time(new String(item.getString().getBytes(
+                                    "ISO-8859-1"), "UTF-8"));
+                        if ("c_word".equals(item.getFieldName())&&cp.getC_word().equals(""))
+                            cp.setC_word(new String(item.getString().getBytes(
+                                    "ISO-8859-1"), "UTF-8"));
+                        if ("c_code".equals(item.getFieldName())&&cp.getC_code().equals(""))
+                            cp.setC_code(new String(item.getString().getBytes(
+                                    "ISO-8859-1"), "UTF-8"));
+                        if ("c_video".equals(item.getFieldName())&&cp.getC_video().equals(""))
+                            cp.setC_video(new String(item.getString().getBytes(
+                                    "ISO-8859-1"), "UTF-8"));
+                        if ("c_certificate".equals(item.getFieldName())&&cp.getC_video().equals(""))
+                            cp.setC_certificate(new String(item.getString().getBytes(
                                     "ISO-8859-1"), "UTF-8"));
                     }
                 }
@@ -142,12 +168,12 @@ public class AddProjectFileServlet extends HttpServlet {
             //       "错误信息: " + ex.getMessage());
         }
 
-        if(new ProjectFileDao().insertProjectFile(pf))
+        if(new CompetitionDao().updateCompetition(cp))
             request.setAttribute("result","true");
         else
             request.setAttribute("result","false");
 
-        request.getRequestDispatcher("/ProjectAdd.jsp").forward(request, response);
+        request.getRequestDispatcher("/Competition/CompetitionEdit.jsp").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

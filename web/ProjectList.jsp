@@ -62,8 +62,16 @@
             }else
                 out.println("<td><a  style='color:#ff5722' href='"+basePath+"upload/"+fp.getP_word()+"'>"+fp.getP_word()+"</a></td>");
             %>
-            <td><%=fp.getP_code().equals("")? "无":fp.getP_code()%></td>
-            <td><%=fp.getP_video().equals("")? "无":fp.getP_video()%></td>
+            <%if(fp.getP_code().equals("")){
+                out.println("<td>无</td>");
+            }else
+                out.println("<td><a  style='color:#ff5722' href='"+basePath+"upload/"+fp.getP_code()+"'>"+fp.getP_code()+"</a></td>");
+            %>
+            <%if(fp.getP_video().equals("")){
+                out.println("<td>无</td>");
+            }else
+                out.println("<td><a  style='color:#ff5722' href='"+basePath+"upload/"+fp.getP_video()+"'>"+fp.getP_video()+"</a></td>");
+            %>
             <td><%=new UserDao().getOneUser(fp.getU_id()).getU_name()%></td>
             <td><%=fp.getP_time()%></td>
             <td id="layer">
@@ -79,6 +87,7 @@
     </table>
 </div>
 <input type="hidden" id="message" value="${message}">
+<input type="hidden" id="result" value="${result}">
 <script type="text/javascript" src="plugins/layui/layui.js"></script>
 </body>
 <script>
@@ -127,6 +136,13 @@
         var error=$("#message").attr("value");
         if(error!=null && error!=""){
             layer.msg(error);
+        }
+
+        var res=$("#result").attr("value");
+        if(res=="true"){
+            layer.msg("删除成功!");
+        }else if(res=="false"){
+            layer.msg("删除失败，请稍后再试！")
         }
     })
 </script>

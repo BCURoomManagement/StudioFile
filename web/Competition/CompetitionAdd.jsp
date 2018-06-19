@@ -19,8 +19,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
 
-    <link rel="stylesheet" href="plugins/layui/css/layui.css" media="all" />
-    <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../plugins/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -28,18 +28,18 @@
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
         <legend>项目文件添加</legend>
     </fieldset>
-    <form method="post"  action="AddProjectFileServlet" enctype="multipart/form-data" >
+    <form method="post"  action="../Competition/AddCompetitionServlet" enctype="multipart/form-data" >
         <div class="layui-form-item">
             <div class="layui-inline">
                 <label class="layui-form-label">比赛名称</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="p_name"  autocomplete="off" class="layui-input">
+                    <input type="text" name="c_name"  autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-inline">
                 <label class="layui-form-label">上传日期</label>
                 <div class="layui-input-block">
-                    <input type="text" name="p_time"  id="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
+                    <input type="text" name="c_time"  id="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
                 </div>
             </div>
             <input name="u_id" value="${sessionScope.u_id}" hidden >
@@ -82,7 +82,7 @@
 
     <input type="hidden" id="result" value="${result}">
 </div>
-<script type="text/javascript" src="plugins/layui/layui.js"></script>
+<script type="text/javascript" src="../plugins/layui/layui.js"></script>
 
 <script>
     layui.use(['form', 'layedit', 'laydate'], function() {
@@ -96,9 +96,9 @@
         var layer=layui.layer,$=layui.jquery;
 
         var res=$("#result").attr("value");
-        if(res==true){
+        if(res=="true"){
             layer.msg("添加成功!");
-        }else if(res==false){
+        }else if(res=="false"){
             layer.msg("添加失败，请稍后再试！")
         }
 

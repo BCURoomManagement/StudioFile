@@ -10,6 +10,17 @@ public class Competition {
     private String c_certificate; //证书
     private String  c_video;
 
+    //不在数据库中字段
+    private String c_username;
+
+    public String getC_username() {
+        return c_username;
+    }
+
+    public void setC_username(String c_username) {
+        this.c_username = c_username;
+    }
+
     public String getC_video() {
         return c_video;
     }
