@@ -67,8 +67,8 @@
             <td><%=new UserDao().getOneUser(fp.getU_id()).getU_name()%></td>
             <td><%=fp.getP_time()%></td>
             <td id="layer">
+                <button  id="edit" data-method="edit" data-type="<%=fp.getP_id()%>" data-path="<%=basePath%>" class="layui-btn layui-btn-mini">编辑</button>
                 <button  id="deletee" data-method="deletee" data-type="<%=fp.getP_id()%>" class="layui-btn layui-btn-mini">删除</button>
-
             </td>
         </tr>
         <%
@@ -102,6 +102,18 @@
                     , btnAlign: 'c' //按钮居中
                     , shade: [0.8, '#393D49'] //显示遮罩
                     , area: ['400px', '300px']
+                });
+            },
+            edit: function(othis){
+                var type = othis.data('type');
+                var path=othis.data('path');
+
+                layer.open({
+                    type: 2
+                    ,offset:'20px'
+                    ,content:''+path+'ProjectEditServlet?p_id='+type+''
+                    ,shade: [0.8, '#393D49'] //显示遮罩
+                    ,area: ['800px', '500px']
                 });
             }
         };

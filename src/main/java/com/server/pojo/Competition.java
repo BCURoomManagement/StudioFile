@@ -3,10 +3,28 @@ package com.server.pojo;
 public class Competition {
     private int c_id;
     private int u_id;
+    private String  c_time;
     private String  c_word;
     private String c_code;
     private String c_name;
     private String c_certificate; //证书
+    private String  c_video;
+
+    public String getC_video() {
+        return c_video;
+    }
+
+    public void setC_video(String c_video) {
+        this.c_video = c_video;
+    }
+
+    public String getC_time() {
+        return c_time;
+    }
+
+    public void setC_time(String c_time) {
+        this.c_time = c_time;
+    }
 
     public int getC_id() {
         return c_id;
