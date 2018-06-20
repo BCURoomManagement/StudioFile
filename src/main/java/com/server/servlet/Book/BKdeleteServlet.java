@@ -12,13 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "BookListMServlet",urlPatterns = "/Book/BookListMServlet")
-public class BookListMServlet extends HttpServlet {
+@WebServlet(name = "BKdeleteServlet",urlPatterns = "/Book/BKdeleteServlet")
+public class BKdeleteServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String b_id=new String (request.getParameter("b_id").getBytes("ISO8859-1"), "UTF-8");
+
         int w_id=new UserDao().getOneUser(Integer.parseInt(request.getSession().getAttribute("u_id").toString())).getW_id();
         List<Book> bkList=new BookDao().getOneWRBook(w_id);
 
@@ -29,9 +31,15 @@ public class BookListMServlet extends HttpServlet {
                 bk.setUsername(new UserDao().getOneUser(Integer.parseInt(request.getSession().getAttribute("u_id").toString())).getU_name());
         }
 
+        boolean result=new BookDao().deleteBook(Integer.parseInt(b_id));
+
+        if(result)
+            request.setAttribute("result","true");
+        else
+            request.setAttribute("result","false");
+
+
         request.setAttribute("bkList",bkList);
-
-
 
         request.getRequestDispatcher("../Book/BookListM.jsp").forward(request,response);
     }

@@ -94,4 +94,84 @@ public class BookDao {
         }
         return false;
     }
+
+    public boolean deleteBook(int b_id) {
+        String sql = "delete from studiofile.book where b_id=?";
+        // 获得连接
+        Connection conn = util.getConnection();
+        try {
+            // 获得预定义语句
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            // 设置插入参数
+            pstmt.setInt(1,b_id);
+
+            // 执行插入
+            if (pstmt.executeUpdate() > 0) {
+                conn.close();
+                return true;
+            } else {
+                conn.close();
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public Book getOneBook(int b_id) {
+        // T-SQL语句
+        String sql = "select * from studiofile.book where b_id=?";
+        // 获得连接
+        Connection conn = util.getConnection();
+        try {
+            // 获得预定义语句
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            // 执行查询
+            pstmt.setInt(1,b_id);
+            ResultSet rs = pstmt.executeQuery();
+            Book bk=new Book();
+            while (rs.next()) {
+                // 封装信息
+                bk.setB_id(rs.getInt(1));
+                bk.setB_name(rs.getString(2));
+                bk.setB_status(rs.getInt(3));
+                bk.setB_provide(rs.getString(4));
+                bk.setU_id(rs.getInt(5));
+                bk.setW_id(rs.getInt(6));
+            }
+            conn.close();
+            return bk;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean updateBook(Book bk) {
+        String sql = "update  studiofile.book set b_name=?,b_provide=? where b_id=?";
+        // 获得连接
+        Connection conn = util.getConnection();
+        try {
+            // 获得预定义语句
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            // 设置插入参数
+            pstmt.setString(1,bk.getB_name());
+            pstmt.setString(2,bk.getB_provide());
+            pstmt.setInt(3,bk.getB_id());
+
+            // 执行插入
+            if (pstmt.executeUpdate() > 0) {
+                conn.close();
+                return true;
+            } else {
+                conn.close();
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }
