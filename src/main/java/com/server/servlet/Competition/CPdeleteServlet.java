@@ -24,9 +24,9 @@ public class CPdeleteServlet extends HttpServlet {
         boolean result=new CompetitionDao().deleteCompetiton(Integer.parseInt(c_id));
 
         if(result)
-            request.setAttribute("result","删除成功!");
+            request.setAttribute("result","true");
         else
-            request.setAttribute("result","删除失败！");
+            request.setAttribute("result","false");
 
         int w_id=new UserDao().getOneUser(Integer.parseInt(request.getSession().getAttribute("u_id").toString())).getW_id();
 

@@ -29,21 +29,6 @@ var navs = [{
         }
     ]
 },{
-    "title": "IT文化节",
-    "icon": "fa-cubes",
-    "spread": false,
-    "children": [
-        {
-            "title": "添加",
-            "icon": "fa-table",
-            "href": ""
-        }, {
-            "title": "查看",
-            "icon": "fa-navicon",
-            "href": ""
-        }
-    ]
-},{
     "title": "软件",
         "icon": "fa-cubes",
         "spread": false,
@@ -51,35 +36,41 @@ var navs = [{
         {
             "title": "添加",
             "icon": "fa-table",
-            "href": ""
+            "href": "Software/SoftwareAdd.jsp"
         }, {
             "title": "查看",
             "icon": "fa-navicon",
-            "href": ""
+            "href": "Software/SoftwareListServlet"
         }
     ]
 },{
     "title": "人员名单",
     "icon": "fa-cubes",
     "spread": false,
-    "href":"peoplesource.jsp"
+    "children": [
+        {
+            "title": "人员查看",
+            "icon": "fa-navicon",
+            "href": "People/PeopleListServlet"
+        }
+    ]
 },{
     "title": "书籍管理",
     "icon": "fa-cubes",
     "spread": false,
     "children": [
         {
-            "title": "添加",
+            "title": "图书添加",
             "icon": "fa-navicon",
-            "href": ""
+            "href": "Book/BookAdd.jsp"
         }, {
-            "title": "图书",
+            "title": "借阅图书",
             "icon": "fa-table",
-            "href": ""
+            "href": "Book/BookListServlet"
         }, {
-            "title": "借阅情况",
-            "icon": "fa-navicon",
-            "href": ""
+            "title": "查看图书",
+            "icon": "fa-table",
+            "href": "Book/BookListMServlet"
         }
     ]
 }

@@ -169,4 +169,56 @@ public class UserDao {
         }
         return null;
     }
+
+    public boolean deleteUser(int u_id) {
+        String sql = "delete from studiofile.user where u_id=?";
+        // 获得连接
+        Connection conn = util.getConnection();
+        try {
+            // 获得预定义语句
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            // 设置插入参数
+            pstmt.setInt(1,u_id);
+
+            // 执行插入
+            if (pstmt.executeUpdate() > 0) {
+                conn.close();
+                return true;
+            } else {
+                conn.close();
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean updateAccount(User us) {
+        String sql = "update  studiofile.user set  u_account=?,u_name=?,u_class=?,u_grade=? where u_id=?";
+        // 获得连接
+        Connection conn = util.getConnection();
+        try {
+            // 获得预定义语句
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            // 设置插入参数
+            pstmt.setString(1,us.getU_account());
+            pstmt.setString(2,us.getU_name());
+            pstmt.setString(3,us.getU_class());
+            pstmt.setString(4,us.getU_grade());
+            pstmt.setInt(5,us.getU_id());
+
+            // 执行插入
+            if (pstmt.executeUpdate() > 0) {
+                conn.close();
+                return true;
+            } else {
+                conn.close();
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
